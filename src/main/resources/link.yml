@@ -1,0 +1,7 @@
+world-links:
+  exemple:
+    nether: exempleneth
+    end: exempleend
+  anotheroverworld:
+    nether: anothernether
+    end: anotherend

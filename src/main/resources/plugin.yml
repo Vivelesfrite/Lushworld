@@ -1,0 +1,43 @@
+name: Lushworld
+version: '1.2.1'
+main: antoine.vivelesfrites.lushworld.Lushworld
+api-version: '1.21'
+
+commands:
+  createmonde:
+    description: Crée un nouveau monde.
+    usage: /createmonde <NomMonde> [type]
+    permission: lushworld.command.createmonde
+  tpmonde:
+    description: Téléporte un joueur vers un monde.
+    usage: /tpmonde [<Joueur>] <NomMonde>
+    permission: lushworld.command.tpmonde
+  deletemonde:
+    description: Supprime un monde existant.
+    usage: /deletemonde <NomMonde>
+    permission: lushworld.command.deletemonde
+  regenmonde:
+    description: Régénère un monde avec une seed définie ou aléatoire.
+    usage: /regenmonde [monde] <seed>
+    permission: lushworld.command.regenmonde
+  linkmonde:
+    description: Lie un monde Overworld avec un Nether ou un End.
+    usage: /linkmonde [monde] <type>
+    permission: lushworld.linkmonde
+
+permissions:
+  lushworld.command.createmonde:
+    description: Permet d'utiliser /createmonde
+    default: op
+  lushworld.command.tpmonde:
+    description: Permet d'utiliser /tpmonde
+    default: op
+  lushworld.command.deletemonde:
+    description: Permet d'utiliser /deletemonde
+    default: op
+  lushworld.command.regenmonde:
+    description: Permet d'utiliser /regenmonde
+    default: op
+  lushworld.linkmonde:
+    description: Permet de lier un monde Overworld avec un Nether ou un End.
+    default: op
