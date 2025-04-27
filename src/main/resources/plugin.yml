@@ -1,7 +1,8 @@
 name: Lushworld
-version: '1.2.1'
+version: '1.0'
 main: antoine.vivelesfrites.lushworld.Lushworld
 api-version: '1.21'
+author: 'Vivelesfrite'
 
 commands:
   createmonde:

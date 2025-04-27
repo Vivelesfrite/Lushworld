@@ -1,6 +1,7 @@
 package antoine.vivelesfrites.lushworld;
 
 import antoine.vivelesfrites.lushworld.commands.*;
+import antoine.vivelesfrites.lushworld.listeners.*;
 import antoine.vivelesfrites.lushworld.managers.*;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -12,6 +13,8 @@ public class Lushworld extends JavaPlugin {
     @Override
     public void onEnable() {
         saveDefaultConfig();
+
+        getServer().getPluginManager().registerEvents(new PlayerWorldChangeListener(this), this);
 
         worldManager = new WorldManager(this);
         portalLinkManager = new PortalLinkManager(this);

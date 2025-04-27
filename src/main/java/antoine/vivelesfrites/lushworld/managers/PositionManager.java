@@ -31,23 +31,35 @@ public class PositionManager {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        } else {
         }
         config = YamlConfiguration.loadConfiguration(file);
     }
 
     public void savePlayerLocation(UUID uuid, String worldName, Location location) {
+        if (location == null) {
+            return;
+        }
+
         String path = uuid.toString() + "." + worldName;
         config.set(path + ".x", location.getX());
         config.set(path + ".y", location.getY());
         config.set(path + ".z", location.getZ());
         config.set(path + ".yaw", location.getYaw());
         config.set(path + ".pitch", location.getPitch());
+
         saveFile();
     }
 
     public Location getSavedLocation(UUID uuid, World world) {
+        if (uuid == null || world == null) {
+            return null;
+        }
+
         String path = uuid.toString() + "." + world.getName();
-        if (!config.contains(path)) return null;
+        if (!config.contains(path)) {
+            return null;
+        }
 
         double x = config.getDouble(path + ".x");
         double y = config.getDouble(path + ".y");
@@ -55,7 +67,8 @@ public class PositionManager {
         float yaw = (float) config.getDouble(path + ".yaw");
         float pitch = (float) config.getDouble(path + ".pitch");
 
-        return new Location(world, x, y, z, yaw, pitch);
+        Location location = new Location(world, x, y, z, yaw, pitch);
+        return location;
     }
 
     private void saveFile() {

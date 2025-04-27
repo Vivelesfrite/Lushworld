@@ -17,10 +17,17 @@ public class PlayerWorldChangeListener implements Listener {
     @EventHandler
     public void onWorldChange(PlayerChangedWorldEvent event) {
         Player player = event.getPlayer();
-        plugin.getPositionManager().savePlayerLocation(
-                player.getUniqueId(),
-                event.getFrom().getName(),
-                event.getFrom().getSpawnLocation() // tu peux changer par player.getLocation() si tu veux enregistrer vraiment sa dernière position exacte
-        );
+        String previousWorld = event.getFrom().getName();
+
+
+        try {
+            plugin.getPositionManager().savePlayerLocation(
+                    player.getUniqueId(),
+                    previousWorld,
+                    player.getLocation()
+            );
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

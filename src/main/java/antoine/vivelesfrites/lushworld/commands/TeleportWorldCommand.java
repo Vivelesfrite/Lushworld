@@ -7,10 +7,7 @@ import org.bukkit.World;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
-
-import java.util.UUID;
 
 public class TeleportWorldCommand implements CommandExecutor {
 
@@ -42,7 +39,8 @@ public class TeleportWorldCommand implements CommandExecutor {
             }
             targetPlayer = (Player) sender;
             worldName = args[0];
-        } else {
+        }
+        else {
             targetPlayer = Bukkit.getPlayer(args[0]);
             if (targetPlayer == null) {
                 sender.sendMessage(plugin.getMessage("messages.player-not-found", "%player%", args[0]));
@@ -57,18 +55,18 @@ public class TeleportWorldCommand implements CommandExecutor {
             return true;
         }
 
-        // On récupère la dernière position sauvegardée
         Location savedLocation = plugin.getPositionManager().getSavedLocation(targetPlayer.getUniqueId(), world);
         if (savedLocation == null) {
-            savedLocation = world.getSpawnLocation(); // fallback spawn si jamais
+            savedLocation = world.getSpawnLocation();
         }
 
         targetPlayer.teleport(savedLocation);
 
         targetPlayer.sendMessage(plugin.getMessage("messages.teleported", "%world%", worldName));
-        if (sender != targetPlayer) {
+        if (!targetPlayer.equals(sender)) {
             sender.sendMessage(plugin.getMessage("messages.teleported-other", "%player%", targetPlayer.getName(), "%world%", worldName));
         }
+
 
         return true;
     }
