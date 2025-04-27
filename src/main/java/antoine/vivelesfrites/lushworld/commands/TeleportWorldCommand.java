@@ -1,13 +1,12 @@
 package antoine.vivelesfrites.lushworld.commands;
 
-import antoine.vivelesfrites.lushworld.Lushworld;
 import org.bukkit.Bukkit;
-import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import antoine.vivelesfrites.lushworld.Lushworld;
 
 public class TeleportWorldCommand implements CommandExecutor {
 
@@ -29,7 +28,7 @@ public class TeleportWorldCommand implements CommandExecutor {
             return false;
         }
 
-        Player targetPlayer;
+        Player targetPlayer = null;
         String worldName;
 
         if (args.length == 1) {
@@ -39,8 +38,7 @@ public class TeleportWorldCommand implements CommandExecutor {
             }
             targetPlayer = (Player) sender;
             worldName = args[0];
-        }
-        else {
+        } else {
             targetPlayer = Bukkit.getPlayer(args[0]);
             if (targetPlayer == null) {
                 sender.sendMessage(plugin.getMessage("messages.player-not-found", "%player%", args[0]));
@@ -55,19 +53,11 @@ public class TeleportWorldCommand implements CommandExecutor {
             return true;
         }
 
-        Location savedLocation = plugin.getPositionManager().getSavedLocation(targetPlayer.getUniqueId(), world);
-        if (savedLocation == null) {
-            savedLocation = world.getSpawnLocation();
-        }
-
-        targetPlayer.teleport(savedLocation);
-
+        targetPlayer.teleport(world.getSpawnLocation());
         targetPlayer.sendMessage(plugin.getMessage("messages.teleported", "%world%", worldName));
-        if (!targetPlayer.equals(sender)) {
+        if (sender != targetPlayer) {
             sender.sendMessage(plugin.getMessage("messages.teleported-other", "%player%", targetPlayer.getName(), "%world%", worldName));
         }
-
-
         return true;
     }
 }

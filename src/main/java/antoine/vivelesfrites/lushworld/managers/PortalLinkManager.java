@@ -109,9 +109,9 @@ public class PortalLinkManager implements Listener {
         }
     }
 
-
-     // Calcule les coordonnées cibles en fonction du ratio d'échelle (Nether ↔ Overworld). :)
-
+    /**
+     * Calcule les coordonnées cibles en fonction du ratio d'échelle (Nether ↔ Overworld).
+     */
     private Location calculateTargetLocation(Location origin, World originWorld, World targetWorld) {
         double scale = 1.0;
 
