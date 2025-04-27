@@ -1,19 +1,21 @@
 package antoine.vivelesfrites.lushworld;
 
 import antoine.vivelesfrites.lushworld.commands.*;
+import antoine.vivelesfrites.lushworld.managers.*;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class Lushworld extends JavaPlugin {
 
     private WorldManager worldManager;
     private PortalLinkManager portalLinkManager;
-
+    private PositionManager positionManager;
     @Override
     public void onEnable() {
         saveDefaultConfig();
 
         worldManager = new WorldManager(this);
         portalLinkManager = new PortalLinkManager(this);
+        positionManager = new PositionManager(this);
 
         worldManager.loadCustomWorlds();
 
@@ -54,5 +56,8 @@ public class Lushworld extends JavaPlugin {
             message = message.replace(placeholders[i], placeholders[i + 1]);
         }
         return org.bukkit.ChatColor.translateAlternateColorCodes('&', message);
+    }
+    public PositionManager getPositionManager() {
+        return positionManager;
     }
 }

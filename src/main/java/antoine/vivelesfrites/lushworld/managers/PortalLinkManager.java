@@ -1,5 +1,6 @@
-package antoine.vivelesfrites.lushworld;
+package antoine.vivelesfrites.lushworld.managers;
 
+import antoine.vivelesfrites.lushworld.Lushworld;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;

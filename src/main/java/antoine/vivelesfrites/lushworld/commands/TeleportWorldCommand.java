@@ -1,12 +1,16 @@
 package antoine.vivelesfrites.lushworld.commands;
 
+import antoine.vivelesfrites.lushworld.Lushworld;
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
-import antoine.vivelesfrites.lushworld.Lushworld;
+
+import java.util.UUID;
 
 public class TeleportWorldCommand implements CommandExecutor {
 
@@ -28,7 +32,7 @@ public class TeleportWorldCommand implements CommandExecutor {
             return false;
         }
 
-        Player targetPlayer = null;
+        Player targetPlayer;
         String worldName;
 
         if (args.length == 1) {
@@ -53,11 +57,19 @@ public class TeleportWorldCommand implements CommandExecutor {
             return true;
         }
 
-        targetPlayer.teleport(world.getSpawnLocation());
+        // On récupère la dernière position sauvegardée
+        Location savedLocation = plugin.getPositionManager().getSavedLocation(targetPlayer.getUniqueId(), world);
+        if (savedLocation == null) {
+            savedLocation = world.getSpawnLocation(); // fallback spawn si jamais
+        }
+
+        targetPlayer.teleport(savedLocation);
+
         targetPlayer.sendMessage(plugin.getMessage("messages.teleported", "%world%", worldName));
         if (sender != targetPlayer) {
             sender.sendMessage(plugin.getMessage("messages.teleported-other", "%player%", targetPlayer.getName(), "%world%", worldName));
         }
+
         return true;
     }
 }
