@@ -1,8 +1,12 @@
 name: Lushworld
 version: '1.0'
 main: antoine.vivelesfrites.lushworld.Lushworld
-api-version: '1.21'
-author: 'Vivelesfrite'
+api-version: '1.20'
+prefix: Lushworld
+load: STARTUP
+authors: [ Vivelesfrite/Antoine ]
+description: FakeMessage
+website: Play.lushcraft.fr
 
 commands:
   createmonde:

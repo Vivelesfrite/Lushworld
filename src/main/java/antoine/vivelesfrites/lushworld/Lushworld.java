@@ -1,7 +1,7 @@
 package antoine.vivelesfrites.lushworld;
 
 import antoine.vivelesfrites.lushworld.commands.*;
-import antoine.vivelesfrites.lushworld.managers.*
+import antoine.vivelesfrites.lushworld.managers.*;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class Lushworld extends JavaPlugin {
@@ -23,7 +23,6 @@ public class Lushworld extends JavaPlugin {
         getCommand("deletemonde").setExecutor(new DeleteWorldCommand(this));
         getCommand("regenmonde").setExecutor(new RegenWorldCommand(this));
         getCommand("linkmonde").setExecutor(new LinkWorldCommand(this));
-
         getCommand("tpmonde").setTabCompleter(new TeleportWorldTabCompleter(this));
 
         getServer().getPluginManager().registerEvents(portalLinkManager, this);
