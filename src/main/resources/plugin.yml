@@ -6,6 +6,7 @@ prefix: Lushworld
 authors: [ Vivelesfrite/Antoine ]
 description: Simple plugin de gestion de monde :)
 website: Play.lushcraft.fr
+load: POSTWORLD
 
 commands:
   createmonde:
